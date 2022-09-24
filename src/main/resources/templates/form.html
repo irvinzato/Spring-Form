@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Formularios con Spring</title>
+</head>
+
+<body>
+
+	<h1>Practica de Formularios con Spring</h1>
+	<h1>Dependencias: thymeleaf, starter-web, devtools, starter-test, starter-validation. V-631</h1>
+	
+	<form th:action="@{/form}" th:object="${usuario}" method="post">
+	
+		<div>
+			<label for="country">Pais</label>
+			<div>
+				<select id="country" th:field="*{country.id}">
+					<option value="">-- Seleccionar --</option>
+					<option th:each="pais: ${listaPaises}" th:text="${pais.name}" th:value="${pais.id}"></option>
+				</select>
+			</div>
+			<div th:if="${#fields.hasErrors('country.id')}" th:errors="*{country.id}">V-656 Agregue lista de paises, lo pase a objeto PAIS V-659</div>
+		</div>
+		
+		<div>
+			<label>Roles</label>
+			<div th:each="rol: ${listaRoles}">
+				<input type="checkbox" th:field="*{roles}" th:value="${rol.id}">
+				<label th:for="${#ids.prev('roles')}" th:text="${rol.name}"></label>
+			</div>
+			<div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}">Añado seleccion de roles V-662</div>
+		</div>
+	
+		<div>
+			<label for="name">Nombre</label>
+			<div>
+				<input type="text" id="name" th:field="*{name}">
+			</div>
+			<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">V-640 Agregue nombre y apellido, campos con informacion por defecto</div>
+		</div>
+		
+		<div>
+			<label for="lastName">Apellido</label>
+			<div>
+				<input type="text" id="lastName" th:field="*{lastName}">
+			</div>
+			<div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+		</div>
+	
+		<div>
+			<label for="username">Username</label>
+			<div>
+				<input type="text" id="username" th:field="*{username}">
+			</div>
+			<div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Atajo del map, en lugar de error.get('key')</div>
+		</div>
+		
+		<div>
+			<label for="password">Password</label>
+			<div>
+				<input type="password" id="password" th:field="*{password}">
+			</div>
+			<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Cambie forma comun a mas uso de thymeleaf V639</div>
+		</div>
+		
+		<div>
+			<label for="email">Email</label>
+			<div>
+				<input type="text" id="email" th:field="*{email}">
+			</div>
+			<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+		</div>
+		
+		<div>
+			<label for="account">Numero de Cuenta</label>
+			<div>
+				<input type="number" id="account" th:field="*{account}">
+			</div>
+			<div th:if="${#fields.hasErrors('account')}" th:errors="*{account}"></div>
+		</div>
+		
+		
+		<div>
+			<label for="dateOfBirth">Fecha de nacimiento</label>
+			<div>
+				<input type="date" id="dateOfBirth" th:field="*{dateOfBirth}">
+			</div>
+			<div th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></div>
+		</div>
+		
+		<div>
+			<label>Genero</label>
+			<div>
+				<input type="radio" id="gender1" th:field="*{gender}" value="Hombre">
+				<label for="gender1">Hombre</label>
+			</div>
+			<div>
+				<input type="radio" id="gender2" th:field="*{gender}" value="Mujer">
+				<label for="gender2">Mujer</label>
+			</div>
+			<div th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Añado Genero - V667</div>
+		</div>
+		
+		<div>
+			<label for="hability">Habilitar</label>
+			<div>
+				<input type="checkbox" id="hability" th:field="*{hability}">
+			</div>
+			<div>Añado opcion de habilitar V-666</div>
+		</div>
+		
+		<div>
+			<div>
+				<input type="submit" value="Enviar">
+			</div>
+		</div>
+		
+		<div>
+			<input type="hidden" th:field="*{secretValue}">
+		</div>
+	</form>
+
+	<h1>Re utilizacion de codigo, componentes que se repiten en HTML con Thymeleaf V-677</h1>
+	<section th:replace="components/tiempoTranscurrido :: interceptor"></section>
+	
+
+</body>
+</html>

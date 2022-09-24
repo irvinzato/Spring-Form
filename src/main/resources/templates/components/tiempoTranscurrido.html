@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<section th:fragment="interceptor">
+		<div th:if="${tiempoTranscurrido} != null">
+			<h1>Interceptores S-82</h1>
+			<h2 th:text="'Tiempo transcurrido: ' + ${tiempoTranscurrido} + ' en milisegundos'"></h2>
+		</div>
+	</section>
+</body>
+</html>
